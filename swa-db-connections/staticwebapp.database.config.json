@@ -1,0 +1,182 @@
+{
+  "$schema": "https://github.com/Azure/data-api-builder/releases/download/v0.7.6/dab.draft.schema.json",
+  "data-source": {
+    "database-type": "mssql",
+    "options": {
+      "set-session-context": false
+    },
+    "connection-string": "Server=tcp:summerofinnovation.database.windows.net,1433;Initial Catalog=KartGoTeamHolidayTracker;Persist Security Info=False;User ID=summerofinnovationuser;Password=t1g3rs11!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+  },
+  "runtime": {
+    "rest": {
+      "enabled": true,
+      "path": "/api"
+    },
+    "graphql": {
+      "allow-introspection": true,
+      "enabled": true,
+      "path": "/graphql"
+    },
+    "host": {
+      "mode": "production",
+      "cors": {
+        "origins": [],
+        "allow-credentials": false
+      },
+      "authentication": {
+        "provider": "StaticWebApps"
+      }
+    }
+  },
+  "entities": {
+    "AbsenceRequest": {
+      "source": "AbsenceRequest",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            "*"
+          ]
+        }
+      ]
+    },
+    "AbsenceType": {
+      "source": "AbsenceType",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            "*"
+          ]
+        }
+      ]
+    },
+    "Department": {
+      "source": "Department",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            "*"
+          ]
+        }
+      ]
+    },
+    "Employee": {
+      "source": "Employee",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            "*"
+          ]
+        }
+      ]
+    },
+    "Team": {
+      "source": "Team",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            "*"
+          ]
+        }
+      ]
+    },
+    "GetAbsenceRequestsByEmployee": {
+      "source": {
+        "type": "stored-procedure",
+        "object": "AbsenceRequestSelectByEmployeeId",
+        "parameters": {
+          "EmployeeId": 1
+        }
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            "execute"
+          ]
+        }
+      ],
+      "rest": {
+        "methods": [
+          "get"
+        ]
+      },
+      "graphql": {
+        "operation": "query"
+      }
+    },
+    "GetEmployees": {
+      "source": {
+        "type": "stored-procedure",
+        "object": "EmployeeSelect"
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            "execute"
+          ]
+        }
+      ],
+      "rest": {
+        "methods": [
+          "get"
+        ]
+      },
+      "graphql": {
+        "operation": "query"
+      }
+    },
+    "GetTeamsByDepartment": {
+      "source": {
+        "type": "stored-procedure",
+        "object": "TeamSelectByDepartmentId",
+        "parameters": {
+          "DepartmentId": 1
+        }
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            "execute"
+          ]
+        }
+      ],
+      "rest": {
+        "methods": [
+          "get"
+        ]
+      },
+      "graphql": {
+        "operation": "query"
+      }
+    },
+    "GetDepartments": {
+      "source": {
+        "type": "stored-procedure",
+        "object": "DepartmentSelect"
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            "execute"
+          ]
+        }
+      ],
+      "rest": {
+        "methods": [
+          "get"
+        ]
+      },
+      "graphql": {
+        "operation": "query"
+      }
+    }
+  }
+}
